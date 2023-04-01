@@ -1,5 +1,6 @@
-import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
+import { LoaderArgs, V2_MetaFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { z } from "zod";
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "UMD Weather" }];
@@ -7,13 +8,11 @@ export const meta: V2_MetaFunction = () => {
 
 export async function loader({}: LoaderArgs) {
   const weather = await getWeather(5, "min");
-  return { weather };
+  return json({ weather });
 }
 
 export default function Index() {
-  let { weather } = useLoaderData<typeof loader>();
-
-  weather = weather.data.map((obj: any) => obj.dateTime);
+  const { weather } = useLoaderData<typeof loader>();
 
   return (
     <div>
@@ -31,7 +30,7 @@ export default function Index() {
 async function getWeather(duration: number, units: "min" | "hr") {
   const min = units === "min" ? duration : duration * 60;
 
-  const req = await fetch(
+  const res = await fetch(
     "https://weather.umd.edu/wordpress/wp-content/plugins/meso-fsct/functions/get-data.php",
     {
       method: "POST",
@@ -54,6 +53,22 @@ async function getWeather(duration: number, units: "min" | "hr") {
         ],
       }),
     }
-  );
-  return await req.json();
+  ).then((res) => res.json());
+
+  return z
+    .object({
+      data: z.array(
+        z.object({
+          dateTime: z.string().transform((str) => Number(str)),
+          outTemp: z.string().transform((str) => Number(str)),
+          dewpoint: z.string().transform((str) => Number(str)),
+          pressure: z.string().transform((str) => Number(str)),
+          rainRate: z.string().transform((str) => Number(str)),
+          windSpeed: z.string().transform((str) => Number(str)),
+          windGust: z.string().transform((str) => Number(str)),
+          windDir: z.string().transform((str) => Number(str)),
+        })
+      ),
+    })
+    .parse(res);
 }
