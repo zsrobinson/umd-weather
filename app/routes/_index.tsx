@@ -1,13 +1,16 @@
 import { LoaderArgs, V2_MetaFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { z } from "zod";
+import { TempWidget } from "~/components/TempWidget";
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: "UMD Weather" }];
 };
 
 export async function loader({}: LoaderArgs) {
+  // offline rn, just wanna work on styling
   // const weather = await getWeather(5, "min");
+
   let weather: Weather[] = [];
   return json({ weather });
 }
@@ -16,10 +19,13 @@ export default function Index() {
   const { weather } = useLoaderData<typeof loader>();
 
   return (
-    <div>
-      <h1>Welcome to UMD Weather</h1>
-      <pre>{JSON.stringify(weather, null, 2)}</pre>
-    </div>
+    <main className="h-screens mx-auto w-fit p-8">
+      <div className="gap-8 grid grid-cols-4">
+        {Array.from(Array(12)).map(() => (
+          <TempWidget temp={48} />
+        ))}
+      </div>
+    </main>
   );
 }
 
