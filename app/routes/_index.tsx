@@ -7,7 +7,8 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export async function loader({}: LoaderArgs) {
-  const weather = await getWeather(5, "min");
+  // const weather = await getWeather(5, "min");
+  let weather: Weather[] = [];
   return json({ weather });
 }
 
@@ -55,20 +56,19 @@ async function getWeather(duration: number, units: "min" | "hr") {
     }
   ).then((res) => res.json());
 
-  return z
-    .object({
-      data: z.array(
-        z.object({
-          dateTime: z.string().transform((str) => Number(str)),
-          outTemp: z.string().transform((str) => Number(str)),
-          dewpoint: z.string().transform((str) => Number(str)),
-          pressure: z.string().transform((str) => Number(str)),
-          rainRate: z.string().transform((str) => Number(str)),
-          windSpeed: z.string().transform((str) => Number(str)),
-          windGust: z.string().transform((str) => Number(str)),
-          windDir: z.string().transform((str) => Number(str)),
-        })
-      ),
-    })
-    .parse(res);
+  const data = z.object({ data: z.array(weatherSchema) }).parse(res);
+  return data.data;
 }
+
+const weatherSchema = z.object({
+  dateTime: z.string().transform((str) => Number(str)),
+  outTemp: z.string().transform((str) => Number(str)),
+  dewpoint: z.string().transform((str) => Number(str)),
+  pressure: z.string().transform((str) => Number(str)),
+  rainRate: z.string().transform((str) => Number(str)),
+  windSpeed: z.string().transform((str) => Number(str)),
+  windGust: z.string().transform((str) => Number(str)),
+  windDir: z.string().transform((str) => Number(str)),
+});
+
+type Weather = z.infer<typeof weatherSchema>;
