@@ -22,7 +22,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-zinc-900 text-gray-50 bg-gradient-to-br from-gray-800 to-gray-900 min-h-screen">
+      <body className="min-h-screen bg-zinc-900 bg-gradient-to-br from-gray-800 to-gray-900 text-gray-50">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

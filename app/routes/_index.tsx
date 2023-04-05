@@ -20,7 +20,7 @@ export default function Index() {
 
   return (
     <main className="h-screens mx-auto w-fit p-8">
-      <div className="gap-8 grid grid-cols-4">
+      <div className="grid grid-cols-4 gap-8">
         {Array.from(Array(12)).map(() => (
           <TempWidget temp={48} />
         ))}
