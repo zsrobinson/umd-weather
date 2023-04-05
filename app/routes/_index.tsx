@@ -20,14 +20,13 @@ export default function Index() {
     <main className="h-screens mx-auto flex w-fit flex-col items-center gap-8 p-8">
       <h1 className="text-4xl font-semibold">UMD Weather</h1>
       <div className="grid grid-cols-4 grid-rows-3 gap-8">
-        {/* {Array.from(Array(6)).map(() => (
-          <TempWidget temp={weather[0].outTemp} />
-        ))} */}
-        <TwoByTwo>Hello World</TwoByTwo>
+        <TempWidget temp={Math.round(weather[0].outTemp)} />
+        <TempWidget temp={weather[0].outTemp} />
         <TwoByTwo>Hello World</TwoByTwo>
         <OneByTwo>Bonjour</OneByTwo>
         <TempWidget temp={weather[0].outTemp} />
         <TempWidget temp={weather[0].outTemp} />
+        <OneByTwo>Bonjour</OneByTwo>
       </div>
     </main>
   );
