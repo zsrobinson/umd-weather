@@ -10,6 +10,10 @@ export const meta: V2_MetaFunction = () => {
 
 export async function loader({}: LoaderArgs) {
   const weather = await getWeather(5, "min");
+
+  // sort from most to least recent (though it should already be sorted)
+  weather.sort((a, b) => b.dateTime - a.dateTime);
+
   return json({ weather });
 }
 
