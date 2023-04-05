@@ -1,5 +1,6 @@
 import { LoaderArgs, V2_MetaFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { OneByTwo, TwoByTwo } from "~/components/base-widgets";
 import { TempWidget } from "~/components/widgets";
@@ -20,9 +21,26 @@ export async function loader({}: LoaderArgs) {
 export default function Index() {
   const { weather } = useLoaderData<typeof loader>();
 
+  const [time, setTime] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    setTime(
+      new Date(weather[0].dateTime * 1000).toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      })
+    );
+  }, []);
+
   return (
     <main className="h-screens mx-auto flex w-fit flex-col items-center gap-8 p-8">
-      <h1 className="text-4xl font-semibold">UMD Weather</h1>
+      <div className="flex flex-col items-center">
+        <h1 className="text-4xl font-semibold">UMD Weather</h1>
+        <span className="whitespace-pre italic text-gray-400">
+          {time ? `Local Weather Updated at ${time}` : " "}
+        </span>
+      </div>
       <div className="grid grid-cols-4 grid-rows-3 gap-8">
         <TempWidget temp={weather[0].outTemp} />
         <TempWidget temp={weather[0].outTemp} />
