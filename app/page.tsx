@@ -21,7 +21,7 @@ export default async function Home() {
           Generated at {time}
         </span>
       </div>
-      <div className="grid grid-cols-4 grid-rows-3 gap-8">
+      <div className="grid grid-cols-2 grid-rows-3 gap-6 lg:grid-cols-4">
         <AwaitedTempWidget />
         <AwaitedTempWidget />
         <TwoByTwo className="whitespace-pre">Hello World!</TwoByTwo>
