@@ -1,5 +1,6 @@
+import { FeelsLikeWidget } from "@/components/FeelsLikeWidget";
 import { TempWidget, TempWidgetSkeleton } from "@/components/TempWidget";
-import { OneByTwo, TwoByTwo } from "@/components/base-widgets";
+import { OneByOne, OneByTwo, TwoByTwo } from "@/components/base-widgets";
 import { Suspense } from "react";
 
 export default async function Home() {
@@ -22,23 +23,14 @@ export default async function Home() {
         </span>
       </div>
       <div className="grid grid-cols-2 grid-rows-3 gap-6 lg:grid-cols-4">
-        <AwaitedTempWidget />
-        <AwaitedTempWidget />
+        <TempWidget />
+        <FeelsLikeWidget />
         <TwoByTwo className="whitespace-pre">Hello World!</TwoByTwo>
         <OneByTwo>Bonjour</OneByTwo>
-        <AwaitedTempWidget />
-        <AwaitedTempWidget />
+        <OneByOne>Hello</OneByOne>
+        <OneByOne>World</OneByOne>
         <OneByTwo>Bonjour</OneByTwo>
       </div>
     </main>
-  );
-}
-
-function AwaitedTempWidget() {
-  return (
-    <Suspense fallback={<TempWidgetSkeleton />}>
-      {/* @ts-expect-error Server Component */}
-      <TempWidget />
-    </Suspense>
   );
 }

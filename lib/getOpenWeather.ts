@@ -144,9 +144,13 @@ export type OpenWeather = z.infer<typeof openWeatherSchema>;
  * @see https://openweathermap.org/api/one-call-3
  */
 export async function getOpenWeather(): Promise<OpenWeather> {
+  // Simulate a slow network request
+  await new Promise((res) => setTimeout(res, 1500));
+
   const query = new URLSearchParams({
     lat: "38.98766",
     lon: "-76.94462",
+    units: "imperial",
     appid: process.env.OPENWEATHERMAP_API_KEY,
   });
 
