@@ -1,9 +1,9 @@
-import { IconSunHigh, IconTemperature } from "@tabler/icons-react";
+import { getTerpsWeather } from "@/lib/getTerpsWeather";
+import { IconTemperature } from "@tabler/icons-react";
 import { OneByOne } from "./base-widgets";
-import { getWeather } from "@/lib/getWeather";
 
 export async function TempWidget() {
-  const weather = await getWeather(5, "min");
+  const weather = await getTerpsWeather(5, "min");
   const temp = weather[0].outTemp;
 
   return (

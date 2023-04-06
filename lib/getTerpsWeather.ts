@@ -1,16 +1,32 @@
 import { z } from "zod";
 
+const terpsWeatherSchema = z.object({
+  dateTime: z.string().transform((str) => Number(str)),
+  outTemp: z.string().transform((str) => Number(str)),
+  dewpoint: z.string().transform((str) => Number(str)),
+  pressure: z.string().transform((str) => Number(str)),
+  rainRate: z.string().transform((str) => Number(str)),
+  windSpeed: z.string().transform((str) => Number(str)),
+  windGust: z.string().transform((str) => Number(str)),
+  windDir: z.string().transform((str) => Number(str)),
+});
+
+type TerpsWeather = z.infer<typeof terpsWeatherSchema>;
+
 /**
  * Gets the weather data from the latest x minutes/hours
  * @param duration number of units to get data for
  * @param units either minutes ("min") or hours ("hr")
  * @returns promised array of weather data
  */
-export async function getWeather(duration: number, units: "min" | "hr") {
+export async function getTerpsWeather(
+  duration: number,
+  units: "min" | "hr"
+): Promise<TerpsWeather[]> {
   const min = units === "min" ? duration : duration * 60;
 
   // Simulate a slow network request
-  await new Promise((res, rej) => setTimeout(res, 1000));
+  await new Promise((res) => setTimeout(res, 1500));
 
   const res = await fetch(
     "https://weather.umd.edu/wordpress/wp-content/plugins/meso-fsct/functions/get-data.php",
@@ -40,19 +56,6 @@ export async function getWeather(duration: number, units: "min" | "hr") {
     }
   ).then((res) => res.json());
 
-  const data = z.object({ data: z.array(weatherSchema) }).parse(res);
+  const data = z.object({ data: z.array(terpsWeatherSchema) }).parse(res);
   return data.data;
 }
-
-const weatherSchema = z.object({
-  dateTime: z.string().transform((str) => Number(str)),
-  outTemp: z.string().transform((str) => Number(str)),
-  dewpoint: z.string().transform((str) => Number(str)),
-  pressure: z.string().transform((str) => Number(str)),
-  rainRate: z.string().transform((str) => Number(str)),
-  windSpeed: z.string().transform((str) => Number(str)),
-  windGust: z.string().transform((str) => Number(str)),
-  windDir: z.string().transform((str) => Number(str)),
-});
-
-type Weather = z.infer<typeof weatherSchema>;

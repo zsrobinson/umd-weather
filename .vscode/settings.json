@@ -1,5 +1,12 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": ["dewpoint", "endms", "mesoterp", "startms"]
+  "cSpell.words": [
+    "dewpoint",
+    "endms",
+    "mesoterp",
+    "startms",
+    "tabler",
+    "terps"
+  ]
 }
