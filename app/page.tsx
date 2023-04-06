@@ -1,7 +1,12 @@
-export default function Home() {
+import { getWeather } from "@/lib/getWeather";
+
+export default async function Home() {
+  const weather = await getWeather(5, "min");
+
   return (
-    <main>
-      <h1 className="p-8 text-2xl font-semibold italic">Hello World!</h1>
+    <main className="p-4">
+      <h1 className="mb-4 text-2xl font-semibold italic">UMD Weather :)</h1>
+      <pre>{JSON.stringify(weather, null, 2)}</pre>
     </main>
   );
 }
