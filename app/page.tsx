@@ -28,7 +28,7 @@ export default async function Home() {
   );
 }
 
-export function FooterButtons() {
+function FooterButtons() {
   return (
     <div className="absolute bottom-4 right-4 flex gap-2">
       <Link
