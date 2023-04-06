@@ -10,7 +10,7 @@ export async function getWeather(duration: number, units: "min" | "hr") {
   const min = units === "min" ? duration : duration * 60;
 
   // Simulate a slow network request
-  // await new Promise((res, rej) => setTimeout(res, 2000));
+  await new Promise((res, rej) => setTimeout(res, 1000));
 
   const res = await fetch(
     "https://weather.umd.edu/wordpress/wp-content/plugins/meso-fsct/functions/get-data.php",

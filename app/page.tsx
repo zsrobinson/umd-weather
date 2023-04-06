@@ -1,29 +1,44 @@
-import { UpdatedAt } from "@/components/UpdatedAt";
+import { TempWidget, TempWidgetSkeleton } from "@/components/TempWidget";
 import { OneByTwo, TwoByTwo } from "@/components/base-widgets";
-import { TempWidget } from "@/components/widgets";
-import { getWeather } from "@/lib/getWeather";
+import { Suspense } from "react";
 
 export default async function Home() {
-  const weather = await getWeather(5, "min");
-  const ms = Date.now();
+  const now = Date.now();
+  const time = new Date(now).toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
+    timeZone: "America/New_York",
+    timeZoneName: "short",
+  });
 
   return (
     <main className="h-screens mx-auto flex w-fit flex-col items-center gap-8 p-8">
       <div className="flex flex-col items-center">
         <h1 className="text-4xl font-semibold">UMD Weather</h1>
-        <UpdatedAt ms={ms} />
+        <span className="whitespace-pre italic text-gray-400">
+          Generated at {time}
+        </span>
       </div>
       <div className="grid grid-cols-4 grid-rows-3 gap-8">
-        <TempWidget temp={weather[0].outTemp} />
-        <TempWidget temp={weather[0].outTemp} />
-        <TwoByTwo className="whitespace-pre">
-          {JSON.stringify(weather[0], null, 2)}
-        </TwoByTwo>
+        <AwaitedTempWidget />
+        <AwaitedTempWidget />
+        <TwoByTwo className="whitespace-pre">Hello World!</TwoByTwo>
         <OneByTwo>Bonjour</OneByTwo>
-        <TempWidget temp={weather[0].outTemp} />
-        <TempWidget temp={weather[0].outTemp} />
+        <AwaitedTempWidget />
+        <AwaitedTempWidget />
         <OneByTwo>Bonjour</OneByTwo>
       </div>
     </main>
+  );
+}
+
+function AwaitedTempWidget() {
+  return (
+    <Suspense fallback={<TempWidgetSkeleton />}>
+      {/* @ts-expect-error Server Component */}
+      <TempWidget />
+    </Suspense>
   );
 }
