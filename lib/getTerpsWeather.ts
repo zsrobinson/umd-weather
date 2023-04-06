@@ -26,9 +26,6 @@ export async function getTerpsWeather(
 ): Promise<TerpsWeather[]> {
   const min = units === "min" ? duration : duration * 60;
 
-  // Simulate a slow network request
-  await new Promise((res) => setTimeout(res, 1500));
-
   const res: unknown = await fetch(
     "https://weather.umd.edu/wordpress/wp-content/plugins/meso-fsct/functions/get-data.php",
     {
