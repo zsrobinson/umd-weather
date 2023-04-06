@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const terpsWeatherSchema = z.object({
+export const terpsWeatherSchema = z.object({
   dateTime: z.string().transform((str) => Number(str)),
   outTemp: z.string().transform((str) => Number(str)),
   dewpoint: z.string().transform((str) => Number(str)),
@@ -11,13 +11,14 @@ const terpsWeatherSchema = z.object({
   windDir: z.string().transform((str) => Number(str)),
 });
 
-type TerpsWeather = z.infer<typeof terpsWeatherSchema>;
+export type TerpsWeather = z.infer<typeof terpsWeatherSchema>;
 
 /**
  * Gets the weather data from the latest x minutes/hours
  * @param duration number of units to get data for
  * @param units either minutes ("min") or hours ("hr")
- * @returns promised array of weather data
+ * @returns promised array of mesoterps weather data
+ * @see https://weather.umd.edu/wordpress/micronet/about-2/
  */
 export async function getTerpsWeather(
   duration: number,
@@ -28,7 +29,7 @@ export async function getTerpsWeather(
   // Simulate a slow network request
   await new Promise((res) => setTimeout(res, 1500));
 
-  const res = await fetch(
+  const res: unknown = await fetch(
     "https://weather.umd.edu/wordpress/wp-content/plugins/meso-fsct/functions/get-data.php",
     {
       method: "POST",
@@ -50,9 +51,7 @@ export async function getTerpsWeather(
           "windDir",
         ],
       }),
-      next: {
-        revalidate: 0,
-      },
+      next: { revalidate: 0 },
     }
   ).then((res) => res.json());
 
