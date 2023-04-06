@@ -34,6 +34,9 @@ export async function getWeather(duration: number, units: "min" | "hr") {
           "windDir",
         ],
       }),
+      next: {
+        revalidate: 0,
+      },
     }
   ).then((res) => res.json());
 
