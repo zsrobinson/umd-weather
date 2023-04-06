@@ -10,6 +10,7 @@ export function UpdatedAt({ ms }: { ms: number }) {
       new Date(ms).toLocaleTimeString([], {
         hour: "numeric",
         minute: "numeric",
+        second: "numeric",
         hour12: true,
       })
     );
@@ -17,7 +18,7 @@ export function UpdatedAt({ ms }: { ms: number }) {
 
   return (
     <span className="whitespace-pre italic text-gray-400">
-      {time ? `Local Weather Updated at ${time}` : " "}
+      {time ? `Page Generated at ${time}` : " "}
     </span>
   );
 }
