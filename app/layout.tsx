@@ -11,7 +11,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="min-h-screen bg-zinc-900 bg-gradient-to-br from-gray-800 to-gray-900 text-gray-50">
+        {children}
+      </body>
     </html>
   );
 }
