@@ -1,38 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# UMD Weather
 
-## Getting Started
+Hey there! I was inspired by the [Mesoterps](https://weather.umd.edu/wordpress/micronet/about-2/) project at the University of Maryland to create a little weather website. I was originally planning on integrating data from Mesoterps into this website, though it only returns current and historical data instead of forecasting, something that would be more useful for a weather app. Instead, I'm using the [One Call API](https://openweathermap.org/api/one-call-3) from OpenWeatherMap to retrieve all of this data for the site.
 
-First, run the development server:
+For some of the technical details, I'm using the Next.js Beta App Directory and React Server Components to render everything. Most of my full stack web dev experience has been with Remix, so I wanted to try out something new. This is all hosted on Vercel and the data is revalidated every two minutes. Since I only get 1,000 free API calls per day from OpenWeatherMap, this ensures I don't go over that limit.
+
+Feel free to star the project or dig into the source code on GitHub! If there's a bug or a feature you'd like to see, feel free to reach out to me about it, open an issue on GitHub, or even better, submit a pull request!
+
+## Local Development Steps
+
+Make sure to request an API Key from OpenWeatherMap and subscribe to the [One Call 3.0 API](https://openweathermap.org/api/one-call-3)!
 
 ```bash
+git clone https://github.com/zsrobinson/umd-weather.git
+cd umd-weather
+echo OPENWEATHERMAP_API_KEY={key} > .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
