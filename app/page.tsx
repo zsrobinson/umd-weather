@@ -1,10 +1,9 @@
 import { ConditionWidget } from "@/components/ConditionWidget";
-import { FeelsLikeWidget } from "@/components/FeelsLikeWidget";
 import { HourlyWidget } from "@/components/HourlyWidget";
 import { TempWidget } from "@/components/TempWidget";
 import { UpdatedAt } from "@/components/UpdatedAt";
 import { WindWidget } from "@/components/WindWidget";
-import { OneByOne, OneByTwo, TwoByTwo } from "@/components/base-widgets";
+import { OneByTwo, TwoByTwo } from "@/components/base-widgets";
 import { IconBrandGithub, IconBug } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -17,12 +16,12 @@ export default async function Home() {
           <UpdatedAt />
         </div>
         <div className="grid grow-0 grid-cols-2 grid-rows-3 gap-6 lg:grid-cols-4">
+          <ConditionWidget />
           <TempWidget />
-          <FeelsLikeWidget />
           <TwoByTwo className="whitespace-pre">Hello World!</TwoByTwo>
           <HourlyWidget />
           <WindWidget />
-          <ConditionWidget />
+          <WindWidget />
           <OneByTwo>Bonjour</OneByTwo>
         </div>
       </main>
