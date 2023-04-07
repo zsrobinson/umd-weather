@@ -1,3 +1,4 @@
+import { ConditionWidget } from "@/components/ConditionWidget";
 import { FeelsLikeWidget } from "@/components/FeelsLikeWidget";
 import { HourlyWidget } from "@/components/HourlyWidget";
 import { TempWidget } from "@/components/TempWidget";
@@ -21,7 +22,7 @@ export default async function Home() {
           <TwoByTwo className="whitespace-pre">Hello World!</TwoByTwo>
           <HourlyWidget />
           <WindWidget />
-          <OneByOne>World</OneByOne>
+          <ConditionWidget />
           <OneByTwo>Bonjour</OneByTwo>
         </div>
       </main>
