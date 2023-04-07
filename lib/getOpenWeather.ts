@@ -151,6 +151,8 @@ export async function getOpenWeather(): Promise<OpenWeather> {
     appid: process.env.OPENWEATHERMAP_API_KEY,
   });
 
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const res: unknown = await fetch(
     `https://api.openweathermap.org/data/3.0/onecall?${query.toString()}`,
     { next: { revalidate: 60 * 2 } }

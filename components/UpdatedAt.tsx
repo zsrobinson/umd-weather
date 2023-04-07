@@ -1,16 +1,14 @@
+import { formatTime } from "@/lib/formatTime";
 import { getOpenWeather } from "@/lib/getOpenWeather";
 import { Suspense } from "react";
 
 export async function UpdatedAtAsync() {
   const weather = await getOpenWeather();
 
-  const time = new Date(weather.current.dt * 1000).toLocaleTimeString([], {
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    hour12: true,
-    timeZone: "America/New_York",
-    timeZoneName: "short",
+  const time = formatTime({
+    date: weather.current.dt,
+    showSeconds: true,
+    showTimezone: true,
   });
 
   return <span className="italic text-gray-400">Updated at {time}</span>;
