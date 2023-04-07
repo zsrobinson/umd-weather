@@ -43,10 +43,13 @@ export function WindWidgetSkeleton() {
   return (
     <OneByOne className="flex flex-col">
       <div className="flex items-center gap-1 text-sm text-gray-400">
-        <IconTemperature size={16} />
-        <span>Temperature</span>
+        <IconWind size={16} />
+        <span>Wind</span>
       </div>
-      <span className="mt-1 h-14 w-full animate-pulse rounded-lg bg-gray-700 bg-opacity-90"></span>
+      <div className="flex h-full items-center gap-2">
+        <div className="flex h-20 w-1/2 animate-pulse flex-col items-center rounded-lg bg-gray-700 bg-opacity-90"></div>
+        <div className="flex h-20 w-1/2 animate-pulse flex-col items-center rounded-lg bg-gray-700 bg-opacity-90"></div>
+      </div>{" "}
     </OneByOne>
   );
 }
