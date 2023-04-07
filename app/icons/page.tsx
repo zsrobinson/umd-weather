@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <main className="grid w-fit grid-cols-2 gap-6 p-8">
       {icons.map((icon) => (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2" key={icon}>
           <IconWeather icon={icon} />
           <span>{icon}</span>
         </div>

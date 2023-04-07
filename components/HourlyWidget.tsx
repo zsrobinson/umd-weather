@@ -16,7 +16,10 @@ export async function HourlyWidgetAsync() {
       </div>
       <div className="flex h-full gap-3 overflow-x-scroll">
         {weather.hourly.map((hour) => (
-          <div className="mx-3 mb-1 mt-3 flex w-full flex-col items-center justify-between gap-1">
+          <div
+            key={hour.dt}
+            className="mx-3 mb-1 mt-3 flex w-full flex-col items-center justify-between gap-1"
+          >
             <span className="text-gray-400">
               {formatTime({ date: hour.dt, showMinutes: false })}
             </span>
