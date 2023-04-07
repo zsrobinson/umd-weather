@@ -2,6 +2,7 @@ import { FeelsLikeWidget } from "@/components/FeelsLikeWidget";
 import { HourlyWidget } from "@/components/HourlyWidget";
 import { TempWidget } from "@/components/TempWidget";
 import { UpdatedAt } from "@/components/UpdatedAt";
+import { WindWidget } from "@/components/WindWidget";
 import { OneByOne, OneByTwo, TwoByTwo } from "@/components/base-widgets";
 import { IconBrandGithub, IconBug } from "@tabler/icons-react";
 import Link from "next/link";
@@ -19,7 +20,7 @@ export default async function Home() {
           <FeelsLikeWidget />
           <TwoByTwo className="whitespace-pre">Hello World!</TwoByTwo>
           <HourlyWidget />
-          <OneByOne>Hello</OneByOne>
+          <WindWidget />
           <OneByOne>World</OneByOne>
           <OneByTwo>Bonjour</OneByTwo>
         </div>
