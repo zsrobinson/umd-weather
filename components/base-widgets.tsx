@@ -18,7 +18,7 @@ export function OneByOne({ children, className }: BaseWidgetProps) {
 export function OneByTwo({ children, className }: BaseWidgetProps) {
   return (
     <div
-      className={`col-span-2 h-48 w-104 rounded-3xl bg-gray-700 bg-opacity-50 p-6 transition hover:scale-[1.035] hover:bg-opacity-70 hover:drop-shadow-2xl ${
+      className={`col-span-2 h-48 w-104 rounded-3xl bg-gray-700 bg-opacity-50 p-6 transition hover:scale-[1.025] hover:bg-opacity-70 hover:drop-shadow-2xl ${
         className ? className : ""
       }`}
     >
