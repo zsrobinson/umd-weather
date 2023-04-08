@@ -4,24 +4,27 @@ import { TempWidget } from "@/components/TempWidget";
 import { UpdatedAt } from "@/components/UpdatedAt";
 import { WindWidget } from "@/components/WindWidget";
 import { OneByTwo, TwoByTwo } from "@/components/base-widgets";
+import { getOpenWeather } from "@/lib/getOpenWeather";
 import { IconBrandGithub, IconBug, IconInfoCircle } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default async function Home() {
+  const weather = await getOpenWeather();
+
   return (
     <>
       <main className="mx-auto flex h-screen w-fit flex-col items-center gap-8 p-8">
         <div className="flex flex-col items-center">
           <h1 className="text-4xl font-semibold">UMD Weather</h1>
-          <UpdatedAt />
+          <UpdatedAt weather={weather} />
         </div>
         <div className="grid grid-cols-2 grid-rows-3 gap-6 lg:grid-cols-4">
-          <ConditionWidget />
-          <TempWidget />
+          <ConditionWidget weather={weather} />
+          <TempWidget weather={weather} />
           <TwoByTwo className="whitespace-pre">Hello World!</TwoByTwo>
-          <HourlyWidget />
-          <WindWidget />
-          <WindWidget />
+          <HourlyWidget weather={weather} />
+          <WindWidget weather={weather} />
+          <WindWidget weather={weather} />
           <OneByTwo>Bonjour</OneByTwo>
         </div>
       </main>
@@ -30,7 +33,7 @@ export default async function Home() {
   );
 }
 
-function FooterButtons() {
+export function FooterButtons() {
   return (
     <>
       <div className="absolute bottom-4 right-4 flex gap-2">

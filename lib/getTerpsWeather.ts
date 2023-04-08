@@ -48,7 +48,6 @@ export async function getTerpsWeather(
           "windDir",
         ],
       }),
-      next: { revalidate: 0 },
     }
   ).then((res) => res.json());
 

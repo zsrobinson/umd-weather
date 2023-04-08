@@ -1,14 +1,10 @@
-import { getOpenWeather } from "@/lib/getOpenWeather";
-import { IconCloud, IconSunHigh, IconTemperature } from "@tabler/icons-react";
-import { Suspense } from "react";
-import { OneByOne } from "./base-widgets";
+import { OpenWeather } from "@/lib/getOpenWeather";
 import { IconWeather } from "./IconWeather";
+import { OneByOne } from "./base-widgets";
 
-export async function ConditionWidgetAsync() {
-  const weather = await getOpenWeather();
-
+export function ConditionWidget({ weather }: { weather: OpenWeather }) {
   return (
-    <OneByOne className="flex flex-col">
+    <OneByOne className="flex flex-col gap-2">
       <div className="flex items-center gap-1 text-sm text-gray-400">
         <IconWeather icon={weather.current.weather[0].icon} size={16} />
         <span>Condition</span>
@@ -35,14 +31,5 @@ export function ConditionWidgetSkeleton() {
         <span className="h-6 w-full animate-pulse rounded-lg bg-gray-700 bg-opacity-90"></span>
       </div>
     </OneByOne>
-  );
-}
-
-export function ConditionWidget() {
-  return (
-    <Suspense fallback={<ConditionWidgetSkeleton />}>
-      {/* @ts-expect-error Server Component */}
-      <ConditionWidgetAsync />
-    </Suspense>
   );
 }

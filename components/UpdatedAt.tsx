@@ -1,10 +1,7 @@
 import { formatTime } from "@/lib/formatTime";
-import { getOpenWeather } from "@/lib/getOpenWeather";
-import { Suspense } from "react";
+import { OpenWeather } from "@/lib/getOpenWeather";
 
-export async function UpdatedAtAsync() {
-  const weather = await getOpenWeather();
-
+export function UpdatedAt({ weather }: { weather: OpenWeather }) {
   const time = formatTime({
     date: weather.current.dt,
     showSeconds: true,
@@ -17,14 +14,5 @@ export async function UpdatedAtAsync() {
 export function UpdatedAtSkeleton() {
   return (
     <div className="my-1 h-4 w-full animate-pulse rounded-lg bg-gray-700 bg-opacity-50"></div>
-  );
-}
-
-export function UpdatedAt() {
-  return (
-    <Suspense fallback={<UpdatedAtSkeleton />}>
-      {/* @ts-expect-error Server Component */}
-      <UpdatedAtAsync />
-    </Suspense>
   );
 }

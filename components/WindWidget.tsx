@@ -1,15 +1,8 @@
-import { getOpenWeather } from "@/lib/getOpenWeather";
-import {
-  IconArrowDownCircle,
-  IconTemperature,
-  IconWind,
-} from "@tabler/icons-react";
-import { Suspense } from "react";
+import { OpenWeather } from "@/lib/getOpenWeather";
+import { IconArrowDownCircle, IconWind } from "@tabler/icons-react";
 import { OneByOne } from "./base-widgets";
 
-export async function WindWidgetAsync() {
-  const weather = await getOpenWeather();
-
+export function WindWidget({ weather }: { weather: OpenWeather }) {
   return (
     <OneByOne className="flex flex-col">
       <div className="flex items-center gap-1 text-sm text-gray-400">
@@ -51,15 +44,6 @@ export function WindWidgetSkeleton() {
         <div className="flex h-20 w-1/2 animate-pulse flex-col items-center rounded-lg bg-gray-700 bg-opacity-90"></div>
       </div>{" "}
     </OneByOne>
-  );
-}
-
-export function WindWidget() {
-  return (
-    <Suspense fallback={<WindWidgetSkeleton />}>
-      {/* @ts-expect-error Server Component */}
-      <WindWidgetAsync />
-    </Suspense>
   );
 }
 
