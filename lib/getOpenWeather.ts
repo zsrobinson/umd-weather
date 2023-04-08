@@ -154,7 +154,10 @@ export async function getOpenWeather(): Promise<OpenWeather> {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   const res: unknown = await fetch(
-    `https://api.openweathermap.org/data/3.0/onecall?${query.toString()}`
+    `https://api.openweathermap.org/data/3.0/onecall?${query.toString()}`,
+    {
+      next: { revalidate: 0 },
+    }
   ).then((res) => res.json());
 
   return openWeatherSchema.parse(res);
