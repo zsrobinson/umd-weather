@@ -1,19 +1,28 @@
-# UMD Weather
+# Create T3 App
 
-Hey there! I was inspired by the [Mesoterps](https://weather.umd.edu/wordpress/micronet/about-2/) project at the University of Maryland to create a little weather website. I was originally planning on integrating data from Mesoterps into this website, though it only returns current and historical data instead of forecasting, something that would be more useful for a weather app. Instead, I'm using the [One Call API](https://openweathermap.org/api/one-call-3) from OpenWeatherMap to retrieve all of this data for the site.
+This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-For some of the technical details, I'm using the Next.js Beta App Directory and React Server Components to render everything. Most of my full stack web dev experience has been with Remix, so I wanted to try out something new. This is all hosted on Vercel and the data is revalidated every two minutes. Since I only get 1,000 free API calls per day from OpenWeatherMap, this ensures I don't go over that limit.
+## What's next? How do I make an app with this?
 
-Feel free to star the project or dig into the source code on GitHub! If there's a bug or a feature you'd like to see, feel free to reach out to me about it, open an issue on GitHub, or even better, submit a pull request!
+We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
 
-## Local Development Steps
+If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
-Make sure to request an API Key from OpenWeatherMap and subscribe to the [One Call 3.0 API](https://openweathermap.org/api/one-call-3)!
+- [Next.js](https://nextjs.org)
+- [NextAuth.js](https://next-auth.js.org)
+- [Prisma](https://prisma.io)
+- [Tailwind CSS](https://tailwindcss.com)
+- [tRPC](https://trpc.io)
 
-```bash
-git clone https://github.com/zsrobinson/umd-weather.git
-cd umd-weather
-echo OPENWEATHERMAP_API_KEY={key} > .env.local
-npm install
-npm run dev
-```
+## Learn More
+
+To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+
+- [Documentation](https://create.t3.gg/)
+- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+
+You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+
+## How do I deploy this?
+
+Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
