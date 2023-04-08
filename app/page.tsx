@@ -33,7 +33,7 @@ export default async function Home() {
   );
 }
 
-function FooterButtons() {
+export function FooterButtons() {
   return (
     <>
       <div className="absolute bottom-4 right-4 flex gap-2">
