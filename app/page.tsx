@@ -4,19 +4,24 @@ import { TempWidget } from "@/components/TempWidget";
 import { UpdatedAt } from "@/components/UpdatedAt";
 import { WindWidget } from "@/components/WindWidget";
 import { OneByTwo, TwoByTwo } from "@/components/base-widgets";
+import { formatTime } from "@/lib/formatTime";
 import { getOpenWeather } from "@/lib/getOpenWeather";
 import { IconBrandGithub, IconBug, IconInfoCircle } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default async function Home() {
   const weather = await getOpenWeather();
+  const genTime = formatTime({ date: Date.now() / 1000, showSeconds: true });
+  const dataTime = formatTime({ date: weather.current.dt, showSeconds: true });
 
   return (
     <>
       <main className="mx-auto flex h-screen w-fit flex-col items-center gap-8 p-8">
         <div className="flex flex-col items-center">
           <h1 className="text-4xl font-semibold">UMD Weather</h1>
-          <UpdatedAt weather={weather} />
+          <span className="italic text-gray-400">
+            Page Generated at {genTime}, Data from {dataTime}
+          </span>
         </div>
         <div className="grid grid-cols-2 grid-rows-3 gap-6 lg:grid-cols-4">
           <ConditionWidget weather={weather} />
