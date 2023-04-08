@@ -1,8 +1,19 @@
-import { type NextPage } from "next";
+import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import Link from "next/link";
+import { ConditionWidget } from "~/components/ConditionWidget";
+import { FooterButtons } from "~/components/FooterButtons";
+import { HourlyWidget } from "~/components/HourlyWidget";
+import { TempWidget } from "~/components/TempWidget";
+import { WindWidget } from "~/components/WindWidget";
+import { OneByTwo, TwoByTwo } from "~/components/base-widgets";
+import { formatTime } from "~/lib/formatTime";
+import { getOpenWeather } from "~/lib/getOpenWeather";
 
-const Home: NextPage = () => {
+export default function Index({
+  weather,
+  genTime,
+  dataTime,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Head>
@@ -13,39 +24,34 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
-          </div>
+      <main className="mx-auto flex h-screen w-fit flex-col items-center gap-8 p-8">
+        <div className="flex flex-col items-center">
+          <h1 className="text-4xl font-semibold">UMD Weather</h1>
+          <span className="italic text-gray-400">
+            Page Generated at {genTime}, Data from {dataTime}
+          </span>
+        </div>
+        <div className="grid grid-cols-2 grid-rows-3 gap-6 lg:grid-cols-4">
+          <ConditionWidget weather={weather} />
+          <TempWidget weather={weather} />
+          <TwoByTwo className="whitespace-pre">Hello World!</TwoByTwo>
+          <HourlyWidget weather={weather} />
+          <WindWidget weather={weather} />
+          <WindWidget weather={weather} />
+          <OneByTwo>Bonjour</OneByTwo>
         </div>
       </main>
+      <FooterButtons />
     </>
   );
-};
+}
 
-export default Home;
+export async function getStaticProps() {
+  const weather = await getOpenWeather();
+  const genTime = formatTime({ date: Date.now() / 1000, showSeconds: true });
+  const dataTime = formatTime({ date: weather.current.dt, showSeconds: true });
+
+  return {
+    props: { weather, genTime, dataTime },
+  };
+}
