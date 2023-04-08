@@ -14,13 +14,13 @@ export function formatTime({
   const options: Intl.DateTimeFormatOptions = {
     hour: "numeric",
     hour12: true,
+    timeZone: "America/New_York",
   };
 
   if (showSeconds) options.second = "numeric";
   if (showMinutes) options.minute = "numeric";
 
   if (showTimezone) {
-    options.timeZone = "America/New_York";
     options.timeZoneName = "short";
   }
 
