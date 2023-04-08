@@ -4,7 +4,7 @@ import { OneByOne } from "./base-widgets";
 
 export function ConditionWidget({ weather }: { weather: OpenWeather }) {
   return (
-    <OneByOne className="flex flex-col">
+    <OneByOne className="flex flex-col gap-2">
       <div className="flex items-center gap-1 text-sm text-gray-400">
         <IconWeather icon={weather.current.weather[0].icon} size={16} />
         <span>Condition</span>
