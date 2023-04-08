@@ -1,13 +1,10 @@
-import { getOpenWeather } from "@/lib/getOpenWeather";
-import { IconClockHour4 } from "@tabler/icons-react";
-import { Suspense } from "react";
-import { OneByTwo } from "./base-widgets";
-import { IconWeather } from "./IconWeather";
 import { formatTime } from "@/lib/formatTime";
+import { OpenWeather } from "@/lib/getOpenWeather";
+import { IconClockHour4 } from "@tabler/icons-react";
+import { IconWeather } from "./IconWeather";
+import { OneByTwo } from "./base-widgets";
 
-export async function HourlyWidgetAsync() {
-  const weather = await getOpenWeather();
-
+export function HourlyWidget({ weather }: { weather: OpenWeather }) {
   return (
     <OneByTwo className="flex flex-col">
       <div className="flex items-center gap-1 text-sm text-gray-400">
@@ -52,14 +49,5 @@ export function HourlyWidgetSkeleton() {
       </div>
       <span className="mt-1 h-full w-full animate-pulse rounded-lg bg-gray-700 bg-opacity-90"></span>
     </OneByTwo>
-  );
-}
-
-export function HourlyWidget() {
-  return (
-    <Suspense fallback={<HourlyWidgetSkeleton />}>
-      {/* @ts-expect-error Server Component */}
-      <HourlyWidgetAsync />
-    </Suspense>
   );
 }
