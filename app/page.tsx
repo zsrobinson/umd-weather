@@ -8,6 +8,8 @@ import { getOpenWeather } from "@/lib/getOpenWeather";
 import { IconBrandGithub, IconBug, IconInfoCircle } from "@tabler/icons-react";
 import Link from "next/link";
 
+export const revalidate = 30;
+
 export default async function Home() {
   const weather = await getOpenWeather();
 
