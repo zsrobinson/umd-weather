@@ -156,7 +156,7 @@ export async function getOpenWeather(): Promise<OpenWeather> {
   const res: unknown = await fetch(
     `https://api.openweathermap.org/data/3.0/onecall?${query.toString()}`,
     {
-      next: { revalidate: 0 },
+      next: { revalidate: 120 },
     }
   ).then((res) => res.json());
 
